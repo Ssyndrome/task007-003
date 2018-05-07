@@ -9,13 +9,19 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
     @Column(nullable = false)
     private String name;
+
     private String gender;
+
     @Column(nullable = false)
     private int age;
+
+    @JoinColumn(name = "company")
     @Column(nullable = false)
     private int companyId;
+
     @Column(nullable = false)
     private Integer salary;
 

@@ -44,7 +44,7 @@ public class EmployeeJPATest {
     public void should_return_employee_when_input_employee_name() {
         //1.查询名字是小红的employee
         String actualName = "xiaohong";
-        Employee expectedEmployee = employeeRepository.findEmployeeByName(actualName);
+        Employee expectedEmployee = employeeRepository.findByName(actualName);
         assertThat(actualName).isEqualTo(expectedEmployee.getName());
     }
 
@@ -53,18 +53,18 @@ public class EmployeeJPATest {
         //2.找出Employee表中第一个姓名包含`n`字符的雇员所有个人信息
         //此处补充测试：且工资大于6000
         String actualName = "xiaohong";
-        Employee expectedEmployee = employeeRepository.findEmployeeNameContainsValueAndGreaterThanSalary("n", 6000);
+        Employee expectedEmployee = employeeRepository.findByNameContainsAndSalaryGreaterThan("n", 6000);
         assertThat(actualName).isEqualTo(expectedEmployee.getName());
         System.out.println(expectedEmployee.getName() + ":" + expectedEmployee.getSalary());
         actualName = "xiaozhi";
-        expectedEmployee = employeeRepository.findEmployeeNameContainsValueAndGreaterThanSalary("x", 7000);
+        expectedEmployee = employeeRepository.findByNameContainsAndSalaryGreaterThan("x", 7000);
         assertThat(actualName).isEqualTo(expectedEmployee.getName());
     }
 
     @Test
     public void should_return_employee_name_when_employee_salary_is_max_and_given_company_id_() {
         //3.找出一个薪资最高且公司ID是1的雇员以及该雇员的name
-        Employee expectedEmployee = employeeRepository.findEmployeeWhoHasMaxSalaryById(1);
+        Employee expectedEmployee = employeeRepository.findFirstByCompanyIdEqualsOrderBySalaryDesc(1);
         String actualName = "xiaohong";
         assertThat(actualName).isEqualTo(expectedEmployee.getName());
     }
@@ -97,7 +97,7 @@ public class EmployeeJPATest {
     public void should_deleted_employee_when_given_employee_name() {
         //7.删除姓名是xiaohong的employee
         employeeRepository.deleteEmployeeByName("xiaohong");
-        Employee actualEmployee = employeeRepository.findEmployeeByName("xiaohong");
+        Employee actualEmployee = employeeRepository.findByName("xiaohong");
         assertThat(actualEmployee).isNull();
     }
 }

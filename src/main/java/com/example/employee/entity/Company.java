@@ -10,8 +10,10 @@ import javax.persistence.Table;
 public class Company {
     @Id
     private int id;
+
     @Column(nullable = false)
     private String companyName;
+
     @Column(nullable = false)
     private int employeesNumber;
 
