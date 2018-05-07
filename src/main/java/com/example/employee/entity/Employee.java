@@ -3,7 +3,7 @@ package com.example.employee.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name="employee")
+@Table(name="Employee")
 public class Employee {
     //主键自增
     @Id
